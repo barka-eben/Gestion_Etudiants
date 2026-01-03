@@ -1,25 +1,31 @@
 #include <stdio.h>
-#include "bibliotheque.h"
+#include "etudiant.h"
 
-int main()
-{
-    etudiant etu[MAX];
-    int n = 0, choix;
+int main() {
+    Etudiant etudiants[MAX_ETUDIANTS];
+    int n = 0;
+    int choix;
 
-    do
-    {
-// presentation des options au user
-        printf("\n1. Ajouter\n2. Rechercher\n3. Modifier\n4. Supprimer\n5. Trier\n6. Afficher\n0. Quitter\n");
+    do {
+        printf("\n--- MENU ---\n");
+        printf("1. Ajouter un etudiant\n");
+        printf("2. Modifier un etudiant\n");
+        printf("0. Quitter\n");
+        printf("Choix : ");
         scanf("%d", &choix);
-// appel des fonctions pour  chaque choix
-        switch (choix)
-        {
-        case 1: n = ajouter(etu, n); break;
-        case 2: rechercher(etu, n); break;
-        case 3: modifier(etu, n); break;
-        case 4: n = supprimer(etu, n); break;
-        case 5: trienom(etu, n); break;
-        case 6: afficher(etu, n); break;
+
+        switch (choix) {
+            case 1:
+                ajouterEtudiant(etudiants, &n);
+                break;
+            case 2:
+                modifierEtudiant(etudiants, n);
+                break;
+            case 0:
+                printf("Fin du programme.\n");
+                break;
+            default:
+                printf("Choix invalide.\n");
         }
     } while (choix != 0);
 
