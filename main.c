@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "etudiant.h"
+#include "bibliotheque.h"
 
 int main() {
     Etudiant etudiants[MAX_ETUDIANTS];
