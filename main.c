@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "bibliotheque.h"
 #include "etudiant.h"
 
 int main() {
