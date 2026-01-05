@@ -109,5 +109,8 @@ Projet réalisé dans le cadre d’un exercice pratique en **langage C**.
 
 ## ✍️ Auteurs
 
+* AMINATOU LINFODI FALAMA (aminatoufalama363)
+* AMINOU DJODA (aminoudjoda)
+* AVANGA KAMBA EBEN-EZER (kamba121)
 * BARKA EBEN-EZEER (barka-eben)
-
+* BEINA BENJAMIN WALARI (Benjamin101214)
