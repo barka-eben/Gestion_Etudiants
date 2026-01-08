@@ -220,3 +220,24 @@ void tri_alphabetique(){
     printf("Tri par nom effectue (ordre alphabetique).\n");
     afficher_etudiants();
 }
+
+void tri_par_filiere() {
+    Etudiant temp;
+    if (n < 2) {
+        printf("Pas assez d'etudiants pour trier.\n");
+        return;
+    }
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (stricmp(tab[i].filiere, tab[j].filiere) > 0) {
+                temp = tab[i];
+                tab[i] = tab[j];
+                tab[j] = temp;
+            }
+        }
+    }
+
+    printf("Tri par filiere effectue (ordre alphabetique).\n");
+    afficher_etudiants();
+}
+
