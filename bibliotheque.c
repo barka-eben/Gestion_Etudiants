@@ -165,3 +165,38 @@ void modifier_etudiant(){
         printf("Choix non valide\n");
     }
 }
+
+void rechercher_etudiant(){
+    char matri[11];
+    int nbre=-1;
+    printf("Entrerz le matricule de l'etudiant a rechercher: ");
+    scanf("%s", &matri);
+    for(int i=0;i<n;i++){
+        if (strcmp(matri,tab[i].matricule)==0){
+            nbre=i;
+            break;
+        }
+    }
+    if (nbre==-1){
+        printf("Etudiant avec le matricule %s introuvable \n",matri);
+        return;
+    }
+    printf("Etudiant avec le matricule %s trouve:\n",matri);
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+    printf("| Nom           | Prenom        | Sexe |  Matricule  | Date naissance    | Departement   | Filiere       | Region origine       | Age  |\n");
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+        printf("| %-13s | %-13s |  %-c   | %-11s | %02d/%02d/%04d        | %-13s | %-13s | %-20s | %-4d |\n",
+               tab[nbre].nom,
+               tab[nbre].prenom,
+               tab[nbre].sexe,
+               tab[nbre].matricule,
+               tab[nbre].date_naissance.jour,
+               tab[nbre].date_naissance.mois,
+               tab[nbre].date_naissance.annee,
+               tab[nbre].departement,
+               tab[nbre].filiere,
+               tab[nbre].region_origine,
+               calcul_age(tab[nbre]));
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+
+}
