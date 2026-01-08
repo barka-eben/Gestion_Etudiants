@@ -200,3 +200,23 @@ void rechercher_etudiant(){
     printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
 
 }
+
+void tri_alphabetique(){
+    Etudiant nomprem;
+    if (n < 2) {
+        printf("Pas assez d'etudiants pour trier.\n");
+        return;
+    }
+    for(int i=0;i<n-1;i++){
+        for (int j=i+1; j<n;j++){
+            if (stricmp(tab[i].nom,tab[j].nom)>0){
+                nomprem=tab[i];
+                tab[i]=tab[j];
+                tab[j]=nomprem;
+            }
+        }
+    }
+    
+    printf("Tri par nom effectue (ordre alphabetique).\n");
+    afficher_etudiants();
+}
