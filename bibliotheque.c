@@ -70,3 +70,98 @@ void afficher_etudiants() {
     }
     printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
 }
+
+void supprimer_etudiant(){
+    char mat[11];
+    int num=-1;
+    int conteur;
+    printf("Entrer le matricule de l'etudiant a supprimer: ");
+    scanf("%s", mat);
+    for (int i=0;i<n;i++){
+        if (strcmp(mat,tab[i].matricule)==0){
+            num=i;
+            break;
+        }
+    }
+    if (num==-1){
+            printf("Matricule introuvable \n");
+            return;
+        }
+    for (conteur=num;conteur<n-1;conteur++){
+            tab[conteur]=tab[conteur+1];
+        }
+    n--;
+    if (n == 0) {
+        free(tab);
+        tab = NULL;
+    } else {
+        Etudiant *temp = realloc(tab, n * sizeof(Etudiant));
+        if (temp != NULL) {
+            tab = temp;
+        }
+    }
+    printf("Le matricule '%s' a ete supprimer \n",mat);
+
+}
+
+void modifier_etudiant(){
+    char mat[11];
+    int num=-1;
+    int nombre;
+    printf("Entrer le matricule de l'etudiant a modifier: ");
+    scanf("%s", mat);
+    for (int i=0;i<n;i++){
+        if (strcmp(mat,tab[i].matricule)==0){
+            num=i;
+            break;
+        }
+    }
+    if (num==-1){
+            printf("Matricule introuvable \n");
+            return;
+        }
+    printf("Quelle information de l'etudiant %s ayant le matricule %s voulez-vous modifier?\n", tab[num].nom,tab[num].matricule); 
+    printf("1. Pour le Nom\n");
+    printf("2. Pour le Prenom\n");
+    printf("3. Pour le Sexe\n");
+    printf("4. Pour le Date de naissance(jour mois annee)\n");
+    printf("5. Pour le Departement\n");
+    printf("6. Pour le Filiere\n");
+    printf("7. Pour le Region d'origine\n");
+    printf("8. . Pour le Quitter \n");
+    scanf("%d",&nombre);
+    switch (nombre){
+    case 1:
+        printf("Nom: ");
+        scanf("%s",tab[num].nom);
+        break;
+    case 2:
+        printf("Prenom: ");
+        scanf("%s",tab[num].prenom);
+        break;
+    case 3:
+        printf("Sexe: ");
+        scanf(" %c",&tab[num].sexe);
+        break;
+    case 4:
+        printf("Date de naissance(separez le jour, mois et annee par la touche 'Entrer'): ");
+        scanf("%d %d %d",&tab[num].date_naissance.jour,&tab[num].date_naissance.mois,&tab[num].date_naissance.annee);
+        break;
+    case 5:
+        printf("Departement: ");
+        scanf("%s",tab[num].departement);
+        break;
+    case 6:
+        printf("Filiere: ");
+        scanf("%s",tab[num].filiere);
+        break;
+    case 7:
+        printf("Region d'origine: ");
+        scanf("%s",tab[num].region_origine);
+        break;
+    case 8:
+        break;
+    default:
+        printf("Choix non valide\n");
+    }
+}
