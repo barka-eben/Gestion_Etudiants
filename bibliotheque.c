@@ -241,3 +241,57 @@ void tri_par_filiere() {
     afficher_etudiants();
 }
 
+
+void recherche_matricule_dichotomie(){
+    Etudiant mattri;
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (strcmp(tab[i].matricule, tab[j].matricule) > 0) {
+                mattri = tab[i];
+                tab[i] = tab[j];
+                tab[j] = mattri;
+            }
+        }
+    }
+
+    char mat[11];
+    int debut=0;
+    int fin=n-1;
+    printf("Entrerz le matricule de l'etudiant a rechercher: ");
+    scanf("%s", mat);
+
+    while (debut<=fin){
+        int milieu=(debut+fin)/2;
+        int position=strcmp(tab[milieu].matricule,mat);
+        if (position==0){
+            printf("Etudiant avec le matricule %s trouve:\n",mat);
+            printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+            printf("| Nom           | Prenom        | Sexe |  Matricule  | Date naissance    | Departement   | Filiere       | Region origine       | Age  |\n");
+            printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+                printf("| %-13s | %-13s |  %-c   | %-11s | %02d/%02d/%04d        | %-13s | %-13s | %-20s | %-4d |\n",
+                    tab[milieu].nom,
+                    tab[milieu].prenom,
+                    tab[milieu].sexe,
+                    tab[milieu].matricule,
+                    tab[milieu].date_naissance.jour,
+                    tab[milieu].date_naissance.mois,
+                    tab[milieu].date_naissance.annee,
+                    tab[milieu].departement,
+                    tab[milieu].filiere,
+                    tab[milieu].region_origine,
+                    calcul_age(tab[milieu]));
+            printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+            return;
+        }
+
+        if (position<0){
+            debut=milieu+1;
+        }else{
+            fin=milieu-1;
+        }
+
+    }
+    printf("Etudiant avec le matricule %s introuvable.\n", mat);
+}
+
