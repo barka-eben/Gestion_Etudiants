@@ -70,3 +70,36 @@ void afficher_etudiants() {
     }
     printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
 }
+
+void supprimer_etudiant(){
+    char mat[11];
+    int num=-1;
+    int conteur;
+    printf("Entrer le matricule de l'etudiant a supprimer: ");
+    scanf("%s", mat);
+    for (int i=0;i<n;i++){
+        if (strcmp(mat,tab[i].matricule)==0){
+            num=i;
+            break;
+        }
+    }
+    if (num==-1){
+            printf("Matricule introuvable \n");
+            return;
+        }
+    for (conteur=num;conteur<n-1;conteur++){
+            tab[conteur]=tab[conteur+1];
+        }
+    n--;
+    if (n == 0) {
+        free(tab);
+        tab = NULL;
+    } else {
+        Etudiant *temp = realloc(tab, n * sizeof(Etudiant));
+        if (temp != NULL) {
+            tab = temp;
+        }
+    }
+    printf("Le matricule '%s' a ete supprimer \n",mat);
+
+}
