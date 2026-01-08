@@ -45,3 +45,28 @@ void ajout_etudiant(){
     scanf("%s",tab[n].region_origine);
     n++;
 }
+
+void afficher_etudiants() {
+    if (n == 0) {
+        printf("Aucun etudiant a afficher\n");
+        return;
+    }
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+    printf("| Nom           | Prenom        | Sexe |  Matricule  | Date naissance    | Departement   | Filiere       | Region origine       | Age  |\n");
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+    for (int i = 0; i < n; i++) {
+        printf("| %-13s | %-13s |  %-c   | %-11s | %02d/%02d/%04d        | %-13s | %-13s | %-20s | %-4d |\n",
+               tab[i].nom,
+               tab[i].prenom,
+               tab[i].sexe,
+               tab[i].matricule,
+               tab[i].date_naissance.jour,
+               tab[i].date_naissance.mois,
+               tab[i].date_naissance.annee,
+               tab[i].departement,
+               tab[i].filiere,
+               tab[i].region_origine,
+               calcul_age(tab[i]));
+    }
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+}
