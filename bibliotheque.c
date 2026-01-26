@@ -36,12 +36,48 @@ void ajout_etudiant(){
     scanf("%s",tab[n].nom);
     printf("Prenom: ");
     scanf("%s",tab[n].prenom);
-    printf("Sexe(M/F): ");
-    scanf(" %c",&tab[n].sexe);
+    do {
+    printf("Sexe (M/F): ");
+
+    if (scanf(" %c", &tab[n].sexe) != 1) {
+        printf("Erreur de saisie.\n");
+        while (getchar() != '\n');
+        continue;
+    }
+
+    if (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
+        tab[n].sexe != 'm' && tab[n].sexe != 'f') {
+        printf("Erreur : entrez M ou F.\n");
+    }
+
+    } while (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
+         tab[n].sexe != 'm' && tab[n].sexe != 'f');
+
     printf("Matricule: ");
     scanf("%s",tab[n].matricule);
-    printf("Date de naissance(jour/mois/annee): ");
-    scanf("%d/%d/%d",&tab[n].date_naissance.jour,&tab[n].date_naissance.mois,&tab[n].date_naissance.annee);
+    int ok;
+
+    do {
+        printf("Date de naissance (jour/mois/annee): ");
+
+        ok = scanf("%d/%d/%d",
+                &tab[n].date_naissance.jour,
+                &tab[n].date_naissance.mois,
+                &tab[n].date_naissance.annee);
+
+        if (ok != 3) {
+            printf("Erreur : veuillez entrer uniquement des nombres.\n");
+            while (getchar() != '\n'); // vider le buffer
+            continue;
+        }
+        if (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
+            tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
+            tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025) {
+            printf("Erreur : date invalide.\n");
+        }
+    } while (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
+            tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
+            tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025);
     printf("Departement: ");
     scanf("%s",tab[n].departement);
     printf("Filiere: ");
@@ -148,12 +184,47 @@ void modifier_etudiant(){
         scanf("%s",tab[num].prenom);
         break;
     case 3:
-        printf("Sexe: ");
-        scanf(" %c",&tab[num].sexe);
+            do {
+        printf("Sexe (M/F): ");
+
+        if (scanf(" %c", &tab[n].sexe) != 1) {
+            printf("Erreur de saisie.\n");
+            while (getchar() != '\n');
+            continue;
+        }
+
+        if (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
+            tab[n].sexe != 'm' && tab[n].sexe != 'f') {
+            printf("Erreur : entrez M ou F.\n");
+        }
+
+        } while (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
+            tab[n].sexe != 'm' && tab[n].sexe != 'f');
         break;
     case 4:
-        printf("Date de naissance(jour/mois/annee): ");
-    scanf("%d/%d/%d",&tab[num].date_naissance.jour,&tab[num].date_naissance.mois,&tab[num].date_naissance.annee);
+        int ok;
+
+        do {
+            printf("Date de naissance (jour/mois/annee): ");
+
+            ok = scanf("%d/%d/%d",
+                    &tab[n].date_naissance.jour,
+                    &tab[n].date_naissance.mois,
+                    &tab[n].date_naissance.annee);
+
+            if (ok != 3) {
+                printf("Erreur : veuillez entrer uniquement des nombres.\n");
+                while (getchar() != '\n'); // vider le buffer
+                continue;
+            }
+            if (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
+                tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
+                tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025) {
+                printf("Erreur : date invalide.\n");
+            }
+        } while (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
+                tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
+                tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025);
         break;
     case 5:
         printf("Departement: ");
