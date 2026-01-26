@@ -183,7 +183,7 @@ void modifier_etudiant(){
         printf("Prenom: ");
         scanf("%s",tab[num].prenom);
         break;
-    case 3:
+    case 3:{
             do {
         printf("Sexe (M/F): ");
 
@@ -200,8 +200,8 @@ void modifier_etudiant(){
 
         } while (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
             tab[n].sexe != 'm' && tab[n].sexe != 'f');
-        break;
-    case 4:
+        break;}
+    case 4:{
         int ok;
 
         do {
@@ -225,7 +225,7 @@ void modifier_etudiant(){
         } while (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
                 tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
                 tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025);
-        break;
+        break;}
     case 5:
         printf("Departement: ");
         scanf("%s",tab[num].departement);
