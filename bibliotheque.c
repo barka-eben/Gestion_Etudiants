@@ -3,6 +3,7 @@
 #include <string.h>
 #include <time.h>
 
+// Fonction pour calculer l'age d'un etudiant
 int calcul_age(Etudiant e){
     time_t maintenant = time(NULL);
     struct tm *date = localtime(&maintenant);
@@ -17,8 +18,11 @@ int calcul_age(Etudiant e){
     return age;
 }
 
+// Tableau dynamique pour stocker les etudiants
 Etudiant *tab = NULL;   
-int n = 0;              
+int n = 0;  
+
+// Fonction pour ajouter un etudiant
 void ajout_etudiant(){
     Etudiant *temp = realloc(tab, (n + 1) * sizeof(Etudiant));
     if (temp == NULL) {
@@ -46,6 +50,7 @@ void ajout_etudiant(){
     n++;
 }
 
+// Fonction pour afficher la liste des etudiants
 void afficher_etudiants() {
     if (n == 0) {
         printf("Aucun etudiant a afficher\n");
@@ -71,6 +76,7 @@ void afficher_etudiants() {
     printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
 }
 
+// Fonction pour supprimer un etudiant par son matricule
 void supprimer_etudiant(){
     char mat[11];
     int num=-1;
@@ -104,6 +110,7 @@ void supprimer_etudiant(){
 
 }
 
+// Fonction pour modifier les informations d'un etudiant
 void modifier_etudiant(){
     char mat[11];
     int num=-1;
@@ -166,6 +173,7 @@ void modifier_etudiant(){
     }
 }
 
+// Fonction pour rechercher un etudiant par son matricule
 void rechercher_etudiant(){
     char matri[11];
     int nbre=-1;
@@ -201,6 +209,7 @@ void rechercher_etudiant(){
 
 }
 
+// Fonction pour trier les etudiants par ordre alphabetique de nom
 void tri_alphabetique(){
     Etudiant nomprem;
     if (n < 2) {
@@ -221,6 +230,7 @@ void tri_alphabetique(){
     afficher_etudiants();
 }
 
+// Fonction pour trier les etudiants par ordre alphabetique de filiere
 void tri_par_filiere() {
     Etudiant temp;
     if (n < 2) {
@@ -242,56 +252,76 @@ void tri_par_filiere() {
 }
 
 
-void recherche_matricule_dichotomie(){
-    Etudiant mattri;
+// Fonction pour rechercher un etudiant par son nom en utilisant la recherche dichotomique
+void recherche_nom_dichotomie() {
+    int num;
+    printf("Pour cette recherche le tableau doit etre trie par nom.\n");
 
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (strcmp(tab[i].matricule, tab[j].matricule) > 0) {
-                mattri = tab[i];
-                tab[i] = tab[j];
-                tab[j] = mattri;
-            }
+    do {
+        printf("Entrer 1 si ce n'est pas encore trie, 2 si c'est deja trie: ");
+        scanf("%d", &num);
+    } while (num != 1 && num != 2);
+
+    if (num == 1) {
+        tri_alphabetique();
+    }
+
+    char nom[40];
+    printf("Entrer le nom de l'etudiant a rechercher: ");
+    scanf("%s", nom);
+
+    int debut = 0;
+    int fin = n - 1;
+    int index = -1;
+    // Recherche dichotomique
+    while (debut <= fin) {
+        int milieu = (debut + fin) / 2;
+        int etat = strcmp(tab[milieu].nom, nom);
+
+        if (etat == 0) {
+            index = milieu;
+            break;
+        } 
+        else if (etat < 0) {
+            debut = milieu + 1;
+        } 
+        else {
+            fin = milieu - 1;
         }
     }
 
-    char mat[11];
-    int debut=0;
-    int fin=n-1;
-    printf("Entrerz le matricule de l'etudiant a rechercher: ");
-    scanf("%s", mat);
-
-    while (debut<=fin){
-        int milieu=(debut+fin)/2;
-        int position=strcmp(tab[milieu].matricule,mat);
-        if (position==0){
-            printf("Etudiant avec le matricule %s trouve:\n",mat);
-            printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
-            printf("| Nom           | Prenom        | Sexe |  Matricule  | Date naissance    | Departement   | Filiere       | Region origine       | Age  |\n");
-            printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
-                printf("| %-13s | %-13s |  %-c   | %-11s | %02d/%02d/%04d        | %-13s | %-13s | %-20s | %-4d |\n",
-                    tab[milieu].nom,
-                    tab[milieu].prenom,
-                    tab[milieu].sexe,
-                    tab[milieu].matricule,
-                    tab[milieu].date_naissance.jour,
-                    tab[milieu].date_naissance.mois,
-                    tab[milieu].date_naissance.annee,
-                    tab[milieu].departement,
-                    tab[milieu].filiere,
-                    tab[milieu].region_origine,
-                    calcul_age(tab[milieu]));
-            printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
-            return;
-        }
-
-        if (position<0){
-            debut=milieu+1;
-        }else{
-            fin=milieu-1;
-        }
-
+    if (index == -1) {
+        printf("Aucun etudiant avec le nom %s.\n", nom);
+        return;
     }
-    printf("Etudiant avec le matricule %s introuvable.\n", mat);
+
+    printf("\nTous les etudiants avec le nom %s:\n", nom);
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+    printf("| Nom           | Prenom        | Sexe | Matricule    | Date naissance    | Departement   | Filiere       | Region origine       | Age  |\n");
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
+
+    // Aller a gauche
+    int i = index;
+    while (i >= 0 && strcmp(tab[i].nom, nom) == 0) {
+        printf("| %-13s | %-13s | %-c    | %-11s | %02d/%02d/%04d        | %-13s | %-13s | %-20s | %-4d |\n",
+            tab[i].nom, tab[i].prenom, tab[i].sexe, tab[i].matricule,
+            tab[i].date_naissance.jour, tab[i].date_naissance.mois, tab[i].date_naissance.annee,
+            tab[i].departement, tab[i].filiere, tab[i].region_origine,
+            calcul_age(tab[i]));
+        i--;
+    }
+
+    // Aller a droite
+    i = index + 1;
+    while (i < n && strcmp(tab[i].nom, nom) == 0) {
+        printf("| %-13s | %-13s | %-c    | %-11s | %02d/%02d/%04d        | %-13s | %-13s | %-20s | %-4d |\n",
+            tab[i].nom, tab[i].prenom, tab[i].sexe, tab[i].matricule,
+            tab[i].date_naissance.jour, tab[i].date_naissance.mois, tab[i].date_naissance.annee,
+            tab[i].departement, tab[i].filiere, tab[i].region_origine,
+            calcul_age(tab[i]));
+        i++;
+    }
+
+    printf("+---------------+---------------+------+-------------+-------------------+---------------+---------------+----------------------+------+\n");
 }
 
