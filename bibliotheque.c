@@ -187,19 +187,19 @@ void modifier_etudiant(){
             do {
         printf("Sexe (M/F): ");
 
-        if (scanf(" %c", &tab[n].sexe) != 1) {
+        if (scanf(" %c", &tab[num].sexe) != 1) {
             printf("Erreur de saisie.\n");
             while (getchar() != '\n');
             continue;
         }
 
-        if (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
-            tab[n].sexe != 'm' && tab[n].sexe != 'f') {
+        if (tab[num].sexe != 'M' && tab[num].sexe != 'F' &&
+            tab[num].sexe != 'm' && tab[num].sexe != 'f') {
             printf("Erreur : entrez M ou F.\n");
         }
 
-        } while (tab[n].sexe != 'M' && tab[n].sexe != 'F' &&
-            tab[n].sexe != 'm' && tab[n].sexe != 'f');
+        } while (tab[num].sexe != 'M' && tab[num].sexe != 'F' &&
+            tab[num].sexe != 'm' && tab[num].sexe != 'f');
         break;
     case 4:
         int ok;
@@ -208,23 +208,23 @@ void modifier_etudiant(){
             printf("Date de naissance (jour/mois/annee): ");
 
             ok = scanf("%d/%d/%d",
-                    &tab[n].date_naissance.jour,
-                    &tab[n].date_naissance.mois,
-                    &tab[n].date_naissance.annee);
+                    &tab[num].date_naissance.jour,
+                    &tab[num].date_naissance.mois,
+                    &tab[num].date_naissance.annee);
 
             if (ok != 3) {
                 printf("Erreur : veuillez entrer uniquement des nombres.\n");
                 while (getchar() != '\n'); // vider le buffer
                 continue;
             }
-            if (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
-                tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
-                tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025) {
+            if (tab[num].date_naissance.jour < 1 || tab[num].date_naissance.jour > 31 ||
+                tab[num].date_naissance.mois < 1 || tab[num].date_naissance.mois > 12 ||
+                tab[num].date_naissance.annee < 1900 || tab[num].date_naissance.annee > 2025) {
                 printf("Erreur : date invalide.\n");
             }
-        } while (tab[n].date_naissance.jour < 1 || tab[n].date_naissance.jour > 31 ||
-                tab[n].date_naissance.mois < 1 || tab[n].date_naissance.mois > 12 ||
-                tab[n].date_naissance.annee < 1900 || tab[n].date_naissance.annee > 2025);
+        } while (tab[num].date_naissance.jour < 1 || tab[num].date_naissance.jour > 31 ||
+                tab[num].date_naissance.mois < 1 || tab[num].date_naissance.mois > 12 ||
+                tab[num].date_naissance.annee < 1900 || tab[num].date_naissance.annee > 2025);
         break;
     case 5:
         printf("Departement: ");
@@ -250,7 +250,7 @@ void rechercher_etudiant(){
     char matri[11];
     int nbre=-1;
     printf("Entrerz le matricule de l'etudiant a rechercher: ");
-    scanf("%s", &matri);
+    scanf("%s", matri);
     for(int i=0;i<n;i++){
         if (strcmp(matri,tab[i].matricule)==0){
             nbre=i;
