@@ -32,7 +32,7 @@ int main(){
         printf("5. Rechercher un etudiant\n");
         printf("6. Trier les etudiants par ordre alphabetique\n");
         printf("7. Trier les etudiants par filiere\n");
-        printf("8. Rechercher un etudiant par matricule (dichotomie)\n");   
+        printf("8. Rechercher un etudiant par nom (dichotomie)\n");   
         printf("9. Quitter\n");
         printf("Choix: ");
         if (scanf("%d", &choix) != 1) {
