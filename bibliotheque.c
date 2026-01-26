@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
+#include <stdlib.h>
 
 // Fonction pour calculer l'age d'un etudiant
 int calcul_age(Etudiant e){
@@ -20,7 +21,7 @@ int calcul_age(Etudiant e){
 
 // Tableau dynamique pour stocker les etudiants
 Etudiant *tab = NULL;   
-int n = 0;  
+int n = 0;   
 
 // Fonction pour ajouter un etudiant
 void ajout_etudiant(){
@@ -39,8 +40,8 @@ void ajout_etudiant(){
     scanf(" %c",&tab[n].sexe);
     printf("Matricule: ");
     scanf("%s",tab[n].matricule);
-    printf("Date de naissance(separez le jour, mois et annee par la touche 'Entrer'): ");
-    scanf("%d %d %d",&tab[n].date_naissance.jour,&tab[n].date_naissance.mois,&tab[n].date_naissance.annee);
+    printf("Date de naissance(jour/mois/annee): ");
+    scanf("%d/%d/%d",&tab[n].date_naissance.jour,&tab[n].date_naissance.mois,&tab[n].date_naissance.annee);
     printf("Departement: ");
     scanf("%s",tab[n].departement);
     printf("Filiere: ");
@@ -50,7 +51,7 @@ void ajout_etudiant(){
     n++;
 }
 
-// Fonction pour afficher la liste des etudiants
+// Fonction pour afficher tous les etudiants
 void afficher_etudiants() {
     if (n == 0) {
         printf("Aucun etudiant a afficher\n");
@@ -151,8 +152,8 @@ void modifier_etudiant(){
         scanf(" %c",&tab[num].sexe);
         break;
     case 4:
-        printf("Date de naissance(separez le jour, mois et annee par la touche 'Entrer'): ");
-        scanf("%d %d %d",&tab[num].date_naissance.jour,&tab[num].date_naissance.mois,&tab[num].date_naissance.annee);
+        printf("Date de naissance(jour/mois/annee): ");
+    scanf("%d/%d/%d",&tab[num].date_naissance.jour,&tab[num].date_naissance.mois,&tab[num].date_naissance.annee);
         break;
     case 5:
         printf("Departement: ");
@@ -209,7 +210,7 @@ void rechercher_etudiant(){
 
 }
 
-// Fonction pour trier les etudiants par ordre alphabetique de nom
+// Fonction pour trier les etudiants par ordre alphabetique selon le nom
 void tri_alphabetique(){
     Etudiant nomprem;
     if (n < 2) {
@@ -230,7 +231,7 @@ void tri_alphabetique(){
     afficher_etudiants();
 }
 
-// Fonction pour trier les etudiants par ordre alphabetique de filiere
+// Fonction pour trier les etudiants par filiere
 void tri_par_filiere() {
     Etudiant temp;
     if (n < 2) {
@@ -250,7 +251,6 @@ void tri_par_filiere() {
     printf("Tri par filiere effectue (ordre alphabetique).\n");
     afficher_etudiants();
 }
-
 
 // Fonction pour rechercher un etudiant par son nom en utilisant la recherche dichotomique
 void recherche_nom_dichotomie() {
